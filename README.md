@@ -1,3 +1,6 @@
-##### 安卓知识复习练习demo
+##### HMDLayout
+
+android normal head + middle(sticky) + bottom layout with scroll conflict resolved
+
 
 
