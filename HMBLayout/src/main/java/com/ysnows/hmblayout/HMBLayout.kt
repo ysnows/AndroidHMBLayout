@@ -34,12 +34,14 @@ class HMBLayout @JvmOverloads constructor(
         if (bottom is ScrollingView) {
             setBottomCurScrollingView(bottom as ScrollingView)
         }
+
+        this.viewTreeObserver.addOnGlobalLayoutListener {
+            headHeight = head!!.measuredHeight
+            Log.d("headHeight", "addOnGlobalLayoutListener:  $headHeight")
+        }
+
     }
 
-    override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
-        super.onLayout(changed, l, t, r, b)
-        Log.d(VIEW_LOG_TAG, "onLayout:  l:$l t:$t r:$r b:$b")
-    }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
@@ -49,11 +51,6 @@ class HMBLayout @JvmOverloads constructor(
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
     }
 
-    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
-        super.onSizeChanged(w, h, oldw, oldh)
-        headHeight = head!!.measuredHeight
-
-    }
 
     override fun onStartNestedScroll(child: View, target: View, axes: Int, type: Int): Boolean {
         return axes and ViewCompat.SCROLL_AXIS_VERTICAL != 0
